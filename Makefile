@@ -5,13 +5,13 @@
 # this stuff is worth it, you can buy me a beer in return.    Thomas Heijligen
 # ----------------------------------------------------------------------------
 
-name = blink
-board = pynq
+name ?= blink2
+board := pynq
 
 all : build/$(name).bit.bin
 
-build/$(name).edif: $(shell ls $(name)/*vhd)
-	@yosys -m ghdl -p "read_verilog +/xilinx/cells_xtra.v; ghdl $^ -e top; synth_xilinx -top top -edif $@"
+build/$(name).edif: $(shell ls lib/*vhd) $(shell ls $(name)/*vhd)
+	@yosys -m ghdl -p "read_verilog +/xilinx/cells_xtra.v; ghdl --std=08 $^ -e top; synth_xilinx -top top -edif $@"
 
 build/$(name).bit: build/$(name).edif
 	@./vivado -nolog -nojournal -mode batch -source run_vivado.tcl -tclargs $(board).xdc $^ $@

@@ -1,0 +1,19 @@
+	PYNQ vhdl examples
+
+tools:
+	ghdl		github.com/ghdl/ghdl
+	yosys		github.com/YosysHQ/yosys
+	ghdlsynth-beta	github.com/tgingold/ghdlsynth-beta
+	vivado		Xilinx, used version 2019.2
+	bit2bitbin 	github.com/pgielda/zynq_bootloader)
+
+notes:
+	The $(name) variable in the makefile chooses the target to build.
+	
+	The ./vivado file is my personal wrapper to execute vivado on a
+	remote host. To run this examples with an local vivado modify the
+	Makefile from ./vivado to vivado or /path/to/your/vivado
+
+licence:
+	My code is published under the Beerware licence, others code,
+	I've copied may licenced different. See the headers in each file.

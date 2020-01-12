@@ -20,7 +20,7 @@ entity Top is
 end Top;
 
 architecture RTL of Top is
-	signal FClk : Std_Logic_Vector (3 downto 0);
+	signal Clk : Std_Logic_Vector (3 downto 0);
 	signal Status : Std_Logic:= '0';
 
 	component PS7 is
@@ -30,18 +30,15 @@ architecture RTL of Top is
 	end component;
 begin
 
-	process (FClk (0)) is
+	process (Clk (0)) is
 	begin
-		if Rising_Edge (FClk (0)) then
+		if Rising_Edge (Clk (0)) then
 				Status <= not Status;
 		end if;
 	end process;
 
-	the_PS : PS7 port map (FCLKCLK => FClk);
+	the_PS : PS7 port map (FCLKCLK => Clk);
 
-	Led (0) <= Status;
-	Led (1) <= Status;
-	Led (2) <= Status;
-	Led (3) <= Status;
+	Led <= (0 => Status, others => '0');
 
 end architecture;

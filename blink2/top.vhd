@@ -15,12 +15,15 @@ use IEEE.Numeric_Std.all;
 use Work.Axi4.all;
 
 entity Top is
+	port (
+		Led	: out Std_Logic_Vector (3 downto 0)
+	);
 end Top;
 
 architecture RTL of Top is
 
-	component Zynq_PS7 is    
-	   port (    
+	component Zynq_PS7 is
+	   port (
 	      Clk0		: out Std_Logic;
 	      GP0_Clk	: in  Std_Logic := '0';
 	      GP0_Reset: out Std_Logic;
@@ -30,9 +33,8 @@ architecture RTL of Top is
 	end component;
 
 	signal Global_Clk : Std_Logic;
-	signal Led			: Std_Logic_Vector (3 downto 0);
 	signal Status		: Std_Logic:= '0';
-	
+
 begin
 
 	Led <= (0 => Status, others => '0');
@@ -44,8 +46,7 @@ begin
 		end if;
 	end process;
 
-	
-	the_PS : Zynq_PS7 port map (
+	my_PS : Zynq_PS7 port map (
 		Clk0 => Global_Clk
 	);
 

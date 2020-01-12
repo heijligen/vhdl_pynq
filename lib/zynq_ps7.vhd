@@ -14,7 +14,7 @@ use Work.Axi4.all;
 
 entity Zynq_PS7 is
 	port (
-		Clk0 : out Std_Logic;
+		Clk0		: out Std_Logic;
 		GP0_Clk	: in  Std_Logic := '0';
 		GP0_Reset: out Std_Logic;
 		GP0_Out	: out Axi4_Full_Master_Out;
@@ -37,7 +37,6 @@ architecture rtl of Zynq_PS7 is
 			MAXIGP0WVALID	: out Std_Logic;
 			MAXIGP0ARID		: out Std_Logic_Vector (11 downto 0);
 			MAXIGP0AWID		: out Std_Logic_Vector (11 downto 0);
-			MAXIGP0WID		: out Std_Logic_Vector (11 downto 0);
 			MAXIGP0ARBURST	: out Std_Logic_Vector ( 1 downto 0);
 			MAXIGP0ARLOCK	: out Std_Logic_Vector ( 1 downto 0);
 			MAXIGP0ARSIZE	: out Std_Logic_Vector ( 1 downto 0);
@@ -86,7 +85,6 @@ begin
 		MAXIGP0WVALID	=> GP0_Out.WValid,
 		MAXIGP0ARID		=> GP0_Out.ArId,
 		MAXIGP0AWID		=> GP0_Out.AwId,
-		MAXIGP0WID		=> GP0_Out.WId,
 		MAXIGP0ARBURST	=> GP0_Out.ArBurst,
 		MAXIGP0ARLOCK	=> GP0_Out.ArLock,
 		MAXIGP0ARSIZE	=> GP0_Out.ArSize,

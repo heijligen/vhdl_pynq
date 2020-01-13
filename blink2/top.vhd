@@ -27,7 +27,7 @@ architecture RTL of Top is
 	      Clk0		: out Std_Logic;
 	      GP0_Clk	: in  Std_Logic := '0';
 	      GP0_Reset: out Std_Logic;
-	      GP0_Out	: out Axi4_Full_Master_Out;
+--	      GP0_Out	: out Axi4_Full_Master_Out;
 	      GP0_In	: in  Axi4_Full_Master_In := Axi4_Full_Slave_To_Master_NC
 	   );
 	end component;

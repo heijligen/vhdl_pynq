@@ -5,7 +5,7 @@
 # this stuff is worth it, you can buy me a beer in return.    Thomas Heijligen
 # ----------------------------------------------------------------------------
 
-name ?= blink
+name ?= blink2
 board := pynq
 
 all : build/$(name).bit.bin

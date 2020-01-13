@@ -28,10 +28,10 @@ type Axi4_Full_Master_To_Slave is record
 	AwProt	: Std_Logic_Vector ( 2 downto 0);
 	AwQos		: Std_Logic_Vector ( 3 downto 0);
 	AwValid	: Std_Logic;
-	AwReady	: Std_Logic;
 	-- Write data channel signals
+	WId		: Std_Logic_Vector (11 downto 0);
 	WData		: Std_Logic_Vector (31 downto 0);
-	WStrb		: Std_Logic_Vector ( 3  downto 0);
+	WStrb		: Std_Logic_Vector ( 3 downto 0);
 	WLast		: Std_Logic;
 	WValid	: Std_Logic;
 	-- Write response channel signals

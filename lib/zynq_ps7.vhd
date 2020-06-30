@@ -14,11 +14,9 @@ use Work.Axi4.all;
 
 entity Zynq_PS7 is
 	port (
-		Clk0		: out Std_Logic;
-		GP0_Clk	: in  Std_Logic := '0';
-		GP0_Reset: out Std_Logic;
-		GP0_Out	: out Axi4_Full_Master_Out;
-		GP0_In	: in  Axi4_Full_Master_In := Axi4_Full_Slave_To_Master_NC
+		Clk0				: out Std_Logic;
+		M_Axi_GP0_Out	: out Axi4_Full_Master_Out;
+		M_Axi_GP0_In	: in  Axi4_Full_Master_In := Axi4_Full_Slave_To_Master_NC
 		);
 end Zynq_PS7;
 
@@ -76,45 +74,45 @@ begin
 
 	the_PS7: PS7 port map (
 		FCLKCLK			=> PS7_FClkClk,
-		MAXIGP0ARESETN	=> GP0_Reset,
-		MAXIGP0ARVALID	=> GP0_Out.ArValid,
-		MAXIGP0AWVALID	=> GP0_Out.AwValid,
-		MAXIGP0BREADY	=> GP0_Out.BReady,
-		MAXIGP0RREADY	=> GP0_Out.RReady,
-		MAXIGP0WLAST	=> GP0_Out.WLast,
-		MAXIGP0WVALID	=> GP0_Out.WValid,
-		MAXIGP0ARID		=> GP0_Out.ArId,
-		MAXIGP0AWID		=> GP0_Out.AwId,
-		MAXIGP0ARBURST	=> GP0_Out.ArBurst,
-		MAXIGP0ARLOCK	=> GP0_Out.ArLock,
-		MAXIGP0ARSIZE	=> GP0_Out.ArSize,
-		MAXIGP0AWBURST	=> GP0_Out.AwBurst,
-		MAXIGP0AWLOCK	=> GP0_Out.AwLock,
-		MAXIGP0AWSIZE	=> GP0_Out.AwSize,
-		MAXIGP0ARPROT	=> GP0_Out.ArProt,
-		MAXIGP0AWPROT	=> GP0_Out.AwProt,
-		MAXIGP0ARADDR	=> GP0_Out.ArAddr,
-		MAXIGP0AWADDR	=> GP0_Out.AwAddr,
-		MAXIGP0WDATA	=> GP0_Out.WData,
-		MAXIGP0ARCACHE	=> GP0_Out.ArCache,
-		MAXIGP0ARLEN	=> GP0_Out.ArLen,
-		MAXIGP0ARQOS	=> GP0_Out.ArQos,
-		MAXIGP0AWCACHE	=> GP0_Out.AwCache,
-		MAXIGP0AWLEN	=> GP0_Out.AwLen,
-		MAXIGP0AWQOS	=> GP0_Out.AwQos,
-		MAXIGP0WSTRB	=> GP0_Out.WStrb,
-		MAXIGP0ACLK		=> GP0_Clk,
-		MAXIGP0ARREADY	=> GP0_In.ArReady,
-		MAXIGP0AWREADY	=> GP0_In.AwReady,
-		MAXIGP0BVALID	=> GP0_In.BValid,
-		MAXIGP0RLAST	=> GP0_In.RLast,
-		MAXIGP0RVALID	=> GP0_In.RValid,
-		MAXIGP0WREADY	=> GP0_In.WReady,
-		MAXIGP0BID		=> GP0_In.BId,
-		MAXIGP0RID		=> GP0_In.RId,
-		MAXIGP0BRESP	=> GP0_In.BResp,
-		MAXIGP0RRESP	=> GP0_In.RResp,
-		MAXIGP0RDATA	=> GP0_In.RData
+		MAXIGP0ARESETN	=> M_Axi_GP0_Out.AResetN,
+		MAXIGP0ARVALID	=> M_Axi_GP0_Out.ArValid,
+		MAXIGP0AWVALID	=> M_Axi_GP0_Out.AwValid,
+		MAXIGP0BREADY	=> M_Axi_GP0_Out.BReady,
+		MAXIGP0RREADY	=> M_Axi_GP0_Out.RReady,
+		MAXIGP0WLAST	=> M_Axi_GP0_Out.WLast,
+		MAXIGP0WVALID	=> M_Axi_GP0_Out.WValid,
+		MAXIGP0ARID		=> M_Axi_GP0_Out.ArId,
+		MAXIGP0AWID		=> M_Axi_GP0_Out.AwId,
+		MAXIGP0ARBURST	=> M_Axi_GP0_Out.ArBurst,
+		MAXIGP0ARLOCK	=> M_Axi_GP0_Out.ArLock,
+		MAXIGP0ARSIZE	=> M_Axi_GP0_Out.ArSize,
+		MAXIGP0AWBURST	=> M_Axi_GP0_Out.AwBurst,
+		MAXIGP0AWLOCK	=> M_Axi_GP0_Out.AwLock,
+		MAXIGP0AWSIZE	=> M_Axi_GP0_Out.AwSize,
+		MAXIGP0ARPROT	=> M_Axi_GP0_Out.ArProt,
+		MAXIGP0AWPROT	=> M_Axi_GP0_Out.AwProt,
+		MAXIGP0ARADDR	=> M_Axi_GP0_Out.ArAddr,
+		MAXIGP0AWADDR	=> M_Axi_GP0_Out.AwAddr,
+		MAXIGP0WDATA	=> M_Axi_GP0_Out.WData,
+		MAXIGP0ARCACHE	=> M_Axi_GP0_Out.ArCache,
+		MAXIGP0ARLEN	=> M_Axi_GP0_Out.ArLen,
+		MAXIGP0ARQOS	=> M_Axi_GP0_Out.ArQos,
+		MAXIGP0AWCACHE	=> M_Axi_GP0_Out.AwCache,
+		MAXIGP0AWLEN	=> M_Axi_GP0_Out.AwLen,
+		MAXIGP0AWQOS	=> M_Axi_GP0_Out.AwQos,
+		MAXIGP0WSTRB	=> M_Axi_GP0_Out.WStrb,
+		MAXIGP0ACLK		=> M_Axi_GP0_In.AClk,
+		MAXIGP0ARREADY	=> M_Axi_GP0_In.ArReady,
+		MAXIGP0AWREADY	=> M_Axi_GP0_In.AwReady,
+		MAXIGP0BVALID	=> M_Axi_GP0_In.BValid,
+		MAXIGP0RLAST	=> M_Axi_GP0_In.RLast,
+		MAXIGP0RVALID	=> M_Axi_GP0_In.RValid,
+		MAXIGP0WREADY	=> M_Axi_GP0_In.WReady,
+		MAXIGP0BID		=> M_Axi_GP0_In.BId,
+		MAXIGP0RID		=> M_Axi_GP0_In.RId,
+		MAXIGP0BRESP	=> M_Axi_GP0_In.BResp,
+		MAXIGP0RRESP	=> M_Axi_GP0_In.RResp,
+		MAXIGP0RDATA	=> M_Axi_GP0_In.RData
 	);
 
 	Clk0 <= PS7_FClkClk (0);

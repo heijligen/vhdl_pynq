@@ -13,10 +13,11 @@ use IEEE.Std_Logic_1164.all;
 use IEEE.Numeric_Std.all;
 
 package Axi4 is
-	--Global signals
-	-- ACLK : 
-	-- ARESETn
+
+-- Axi4 Full
 type Axi4_Full_Master_To_Slave is record
+	-- Global signals
+	AResetN	: Std_Logic;
 	-- Write address channel signals
 	AwId		: Std_Logic_Vector (11 downto 0);
 	AwAddr	: Std_Logic_Vector (31 downto 0);
@@ -29,7 +30,6 @@ type Axi4_Full_Master_To_Slave is record
 	AwQos		: Std_Logic_Vector ( 3 downto 0);
 	AwValid	: Std_Logic;
 	-- Write data channel signals
-	WId		: Std_Logic_Vector (11 downto 0);
 	WData		: Std_Logic_Vector (31 downto 0);
 	WStrb		: Std_Logic_Vector ( 3 downto 0);
 	WLast		: Std_Logic;
@@ -54,6 +54,8 @@ alias Axi4_Full_Master_Out is Axi4_Full_Master_To_Slave;
 alias Axi4_Full_Slave_In   is Axi4_Full_Master_To_Slave;
 
 type Axi4_Full_Slave_To_Master is record
+	-- Global signals
+	AClk		: Std_Logic;
 	-- Write address channel signals
 	AwReady	: Std_Logic;
 	-- Write data channel signals
@@ -75,6 +77,7 @@ alias Axi4_Full_Master_In is Axi4_Full_Slave_To_Master;
 alias Axi4_Full_Slave_Out is Axi4_Full_Slave_To_Master;
 
 constant Axi4_Full_Slave_To_Master_NC : Axi4_Full_Slave_To_Master := (
+	AClk		=> '0',
 	AwReady	=> '0',
 	WReady	=> '0',
 	BId		=> (others => '0'),
@@ -86,6 +89,62 @@ constant Axi4_Full_Slave_To_Master_NC : Axi4_Full_Slave_To_Master := (
 	RResp		=> (others => '0'),
 	RLast		=> '0',
 	RValid	=> '0'
+);
+
+-- AXI4 Lite
+type Axi4_Lite_Master_To_Slave is record
+	-- Global signals
+	AResetN	: Std_Logic;
+	-- Write address channel
+	AwValid	: Std_Logic;
+	AwAddr	: Std_Logic_Vector (31 downto 0);
+	AwProt	: Std_Logic_Vector ( 2 downto 0);
+	-- Write data channel signals
+	WValid	: Std_Logic;
+	WData		: Std_Logic_Vector (31 downto 0);
+	WStrb		: Std_Logic_Vector ( 3 downto 0);
+	-- Write response channel signals
+	BReady	: Std_Logic;
+	-- Read address channel signals
+	ArValid	: Std_Logic;
+	ArAddr	: Std_Logic_Vector (31 downto 0);
+	ArProt	: Std_Logic_Vector ( 2 downto 0);
+	-- Read data channel signals
+	RReady	: Std_Logic;
+end record;
+alias Axi4_Lite_Master_Out is Axi4_Lite_Master_To_Slave;
+alias Axi4_Lite_Slave_In   is Axi4_Lite_Master_To_Slave;
+
+type Axi4_Lite_Slave_To_Master is record
+	-- Global signals
+	AClk		: Std_Logic;
+	-- Write address channel
+	AwReady	: Std_Logic;
+	-- Write data channel
+	WReady	: Std_Logic;
+	-- Write response channel
+	BValid	: Std_Logic;
+	BResp		: Std_Logic_Vector ( 1 downto 0);
+	-- Read address channel
+	ArReady	: Std_Logic;
+	-- Read data channel
+	RValid	: Std_Logic;
+	RData		: Std_Logic_Vector (31 downto 0);
+	RResp		: Std_Logic_Vector ( 1 downto 0);
+end record;
+alias Axi4_Lite_Master_In is Axi4_Lite_Slave_To_Master;
+alias Axi4_Lite_Slave_Out is Axi4_Lite_Slave_To_Master;
+
+constant Axi4_Lite_Slave_To_Master_NC : Axi4_Lite_Slave_To_Master := (
+	AClk		=> '0',
+	AwReady	=> '0',
+	WReady	=> '0',
+	BValid	=> '0',
+	BResp		=> (others => '0'),
+	ArReady	=> '0',
+	RValid	=> '0',
+	RData		=> (others => '0'),
+	RResp		=> (others => '0')
 );
 
 end Axi4;
